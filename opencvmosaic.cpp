@@ -172,16 +172,21 @@ locatePlanarObject( const CvSeq* objectKeypoints, const CvSeq* objectDescriptors
 
 int main(int argc, char** argv)
 {
+  if (argc < 4) {
+    printf("Usage:\n\topencvmosaic <input1> <input2> <output>\n");
+    exit(1);
+  }
+
 	//Load filename arguments or use defaults
-    const char* object_filename = argc >= 3 ? argv[1] : "image8u.jpg";
-    const char* scene_filename = argc >= 3 ? argv[2] : "image72u.jpg";
+    const char* object_filename = argc >= 3 ? argv[1] : argv[1];
+    const char* scene_filename = argc >= 3 ? argv[2] : argv[2];
 	const char * output_filename;
 	if(argc >= 4)
 	{
 		 output_filename = argv[3];
 	}
 	else
-		 output_filename = "combo.png";
+		 output_filename = argv[3];
 
 	int downsample = 1;
 	if(argc >=5)
